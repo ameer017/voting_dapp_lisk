@@ -44,5 +44,3 @@
 
 --> The contract includes error handling using require statements to ensure that certain conditions are met before executing functions.
 --> For example, the vote function checks if the voter has already voted and if the provided candidate index is valid.
-
-

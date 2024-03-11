@@ -163,5 +163,4 @@ const contractAbi = [
     type: "function",
   },
 ];
-
 export { contractAbi, contractAddress };

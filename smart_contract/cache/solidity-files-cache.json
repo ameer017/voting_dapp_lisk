@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/Users/mac/Desktop/play/lisk_project/contracts/Voting.sol": {
-      "lastModificationDate": 1710159051769,
+    "/Users/mac/Desktop/play/lisk_project/smart_contract/contracts/Voting.sol": {
+      "lastModificationDate": 1710189028740,
       "contentHash": "fa7fa0131e66bbc05653a4cc6efc34fe",
       "sourceName": "contracts/Voting.sol",
       "solcConfig": {
