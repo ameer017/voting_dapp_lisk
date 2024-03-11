@@ -14,9 +14,9 @@ function App() {
   const [candidate, setCandidate] = useState(null);
 
   useEffect(() => {
-    // getCandidates
-    // getCurrentStatus
-    // getRemainingTime
+    // getCandidates()
+    // getCurrentStatus()
+    // getRemainingTime()
 
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", handleAccountsChanged);
