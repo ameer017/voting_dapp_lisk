@@ -13,6 +13,7 @@ function App() {
   const [remainingTime, setRemainingTime] = useState(null);
   const [candidates, setCandidates] = useState([]);
   const [number, setNumber] = useState("");
+  const [canVote, setCanVote] = useState(true);
 
   useEffect(() => {
     // getCandidates()
@@ -32,6 +33,35 @@ function App() {
       }
     };
   });
+
+  async function vote() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const contractInstance = new ethers.Contract(
+      contractAbi,
+      contractAddress,
+      signer
+    );
+
+    const tx = await contractInstance.vote(number);
+    await tx.wait();
+    canVote();
+  }
+
+  async function canVote() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const contractInstance = new ethers.Contract(
+      contractAbi,
+      contractAddress,
+      signer
+    );
+
+    const voteStatus = await contractInstance.voters(await signer.getAddress());
+    setCanVote(voteStatus);
+  }
 
   async function getCandidates() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -85,6 +115,7 @@ function App() {
   function handleAccountsChanged(accounts) {
     if (accounts.length > 0 && account !== accounts[0]) {
       setAccount(accounts[0]);
+      // canVote()
     } else {
       setIsConnected(false);
       setAccount(null);
@@ -102,6 +133,7 @@ function App() {
         setAccount(address);
         console.log("Metamask connected: " + address);
         setIsConnected(true);
+        // canVote()
       } catch (err) {
         console.log(err);
       }
