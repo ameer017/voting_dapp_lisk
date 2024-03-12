@@ -110,6 +110,9 @@ function App() {
     }
   }
 
+  async function handleNumberChange(e) {
+    setNumber(e.target.value);
+  }
   return (
     <>
       {isConnected ? (
@@ -118,6 +121,7 @@ function App() {
           candidates={candidates}
           remainingTime={remainingTime}
           number={number}
+          handleNumberChange={handleNumberChange}
         />
       ) : (
         <Login connectWallet={connectWallet} />
