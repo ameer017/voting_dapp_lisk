@@ -10,15 +10,20 @@ const Connected = (props) => {
         <p>Metamask account: {props.account}</p>
         <p>Remaining Time: {props.remainingTime}</p>
 
-        <div>
-          <input
-            type="number"
-            placeholder="Enter Candidate Index"
-            value={props.number}
-            onChange={props.handleNumberChange}
-          />
-          <button onClick={props.voteFunction}>Vote</button>
-        </div>
+        {props.showbutton ? (
+          <p>You have already Voted!!</p>
+        ) : (
+          <div>
+            <input
+              type="number"
+              placeholder="Enter Candidate Index"
+              value={props.number}
+              onChange={props.handleNumberChange}
+            />{" "}
+            <br />
+            <button onClick={props.voteFunction}>Vote</button>
+          </div>
+        )}
 
         <table>
           <thead>

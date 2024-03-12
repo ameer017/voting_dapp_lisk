@@ -10,7 +10,7 @@ const Login = (props) => {
         <div>
           <span className="--text-grey --text-sm">
             {" "}
-            Developed on <a href="">Lisk Protocol</a>
+            Developed on <a href="https://lisk.com/">Lisk Protocol</a>
           </span>
         </div>
 

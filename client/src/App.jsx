@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { contractAbi, contractAddress } from "./constant/constant";
 import Login from "./component/Login";
 import Connected from "./component/Connected";
+import Finish from "./component/Finish";
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -13,7 +14,7 @@ function App() {
   const [remainingTime, setRemainingTime] = useState(null);
   const [candidates, setCandidates] = useState([]);
   const [number, setNumber] = useState("");
-  const [canVote, setCanVote] = useState(true);
+  const [CanVote, setCanVote] = useState(true);
 
   useEffect(() => {
     // getCandidates()
@@ -147,16 +148,24 @@ function App() {
   }
   return (
     <>
-      {isConnected ? (
-        <Connected
-          account={account}
-          candidates={candidates}
-          remainingTime={remainingTime}
-          number={number}
-          handleNumberChange={handleNumberChange}
-        />
+      {votingStatus ? (
+        <>
+          {isConnected ? (
+            <Connected
+              account={account}
+              candidates={candidates}
+              remainingTime={remainingTime}
+              number={number}
+              handleNumberChange={handleNumberChange}
+              voteFunction={vote}
+              showButton={CanVote}
+            />
+          ) : (
+            <Login connectWallet={connectWallet} />
+          )}
+        </>
       ) : (
-        <Login connectWallet={connectWallet} />
+        <Finish />
       )}
     </>
   );
