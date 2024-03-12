@@ -196,6 +196,9 @@ p {
 .--text-light {
   color: #fff;
 }
+.--text-grey {
+  color: #808080cd;
+}
 
 .--color-primary {
   color: #007bff;

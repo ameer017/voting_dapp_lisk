@@ -11,7 +11,8 @@ function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [votingStatus, setVotingStatus] = useState(true);
   const [remainingTime, setRemainingTime] = useState(null);
-  const [candidate, setCandidate] = useState(null);
+  const [candidates, setCandidates] = useState([]);
+  const [number, setNumber] = useState("");
 
   useEffect(() => {
     // getCandidates()
@@ -41,9 +42,16 @@ function App() {
       contractAddress,
       signer
     );
-    const candidateList = await contractInstance.getAllVotesOfCandidates();
-    console.log(candidateList);
-    setCandidate(candidateList);
+    const candidatesList = await contractInstance.getAllVotesOfCandidates();
+    // console.log(candidateList);
+    const formattedCandidates = candidatesList.map((candidate, index) => {
+      return {
+        index: index,
+        name: candidate.name,
+        voteCount: candidate.voteCount.toNumber(),
+      };
+    });
+    setCandidates(formattedCandidates);
   }
 
   async function getCurrentStatus() {
@@ -105,7 +113,12 @@ function App() {
   return (
     <>
       {isConnected ? (
-        <Connected account={account} />
+        <Connected
+          account={account}
+          candidates={candidates}
+          remainingTime={remainingTime}
+          number={number}
+        />
       ) : (
         <Login connectWallet={connectWallet} />
       )}
